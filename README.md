@@ -7,7 +7,7 @@
 - [x] Tidy up build process
 - [x] Setup database
 - [x] Setup auth
-- [ ] Add image upload
+- [x] Add image upload
 - [ ] "taint" (server-only)
 - [ ] Routing/image page
 - [ ] Error management
