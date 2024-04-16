@@ -32,14 +32,16 @@ export default function RootLayout({
 
 function SiteHeader() {
   return (
-    <nav className="flex w-full items-center justify-between p-4">
-      <Link className="text-xl font-semibold" href="/">
-        Gallery
-      </Link>
+    <nav className="px-6 py-4">
+      <div className="mx-auto flex max-w-7xl items-center justify-between">
+        <Link className="text-xl font-semibold" href="/">
+          Gallery
+        </Link>
 
-      <Link href="/sign-in" className="text-sm">
-        Sign In
-      </Link>
+        <Link href="/sign-in" className="text-sm">
+          Sign In
+        </Link>
+      </div>
     </nav>
   );
 }
