@@ -8,8 +8,7 @@
 - [x] Setup database
 - [x] Setup auth
 - [x] Add image upload
-- [ ] "taint" (server-only)
-- [ ] Routing/image page
+- [x] Routing/image page
 - [ ] Error management
 - [ ] Delete button
 - [ ] Analytics
