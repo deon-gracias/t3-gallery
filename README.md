@@ -6,8 +6,9 @@
 - [x] Scaffold basic ui with mock data
 - [x] Tidy up build process
 - [x] Setup database
-- [ ] Setup auth
+- [x] Setup auth
 - [ ] Add image upload
+- [ ] "taint" (server-only)
 - [ ] Routing/image page
 - [ ] Error management
 - [ ] Delete button
