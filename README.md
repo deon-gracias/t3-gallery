@@ -2,7 +2,7 @@
 
 ## TODOS
 
-- [ ] Make it deply
+- [x] Make it deploy
 - [ ] Scaffold basic ui with mock data
 - [ ] Setup database
 - [ ] Setup auth
