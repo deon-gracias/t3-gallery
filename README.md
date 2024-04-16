@@ -3,7 +3,7 @@
 ## TODOS
 
 - [x] Make it deploy
-- [ ] Scaffold basic ui with mock data
+- [x] Scaffold basic ui with mock data
 - [ ] Setup database
 - [ ] Setup auth
 - [ ] Add image upload

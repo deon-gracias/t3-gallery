@@ -1,6 +1,8 @@
 import "~/styles/globals.css";
+import "@uploadthing/react/styles.css";
 
 import { Inter } from "next/font/google";
+import Link from "next/link";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,7 +22,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>{children}</body>
+      <body className={`font-sans ${inter.variable} flex flex-col`}>
+        <SiteHeader />
+        {children}
+      </body>
     </html>
+  );
+}
+
+function SiteHeader() {
+  return (
+    <nav className="flex w-full items-center justify-between p-4">
+      <Link className="text-xl font-semibold" href="/">
+        Gallery
+      </Link>
+
+      <Link href="/sign-in" className="text-sm">
+        Sign In
+      </Link>
+    </nav>
   );
 }
