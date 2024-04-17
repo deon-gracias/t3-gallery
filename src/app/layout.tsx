@@ -1,14 +1,16 @@
 import "~/styles/globals.css";
-import "@uploadthing/react/styles.css";
 
-import { Inter } from "next/font/google";
+import { Inter as FontSans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { SiteHeader } from "./_components/SiteHeader";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
 
-const inter = Inter({
+import { cn } from "~/lib/utils";
+import { Toaster } from "~/components/ui/sonner";
+
+const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -21,14 +23,12 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-  modal,
 }: {
   children: React.ReactNode;
-  modal: React.ReactNode;
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <NextSSRPlugin
           /**
            * The `extractRouterConfig` will extract **only** the route configs
@@ -38,11 +38,22 @@ export default function RootLayout({
            */
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
-        <body className={`font-sans ${inter.variable} flex flex-col`}>
-          <SiteHeader />
-          {children}
-          {modal}
-          <div id="modal-root" />
+        <body
+          className={cn(
+            "min-h-screen bg-background font-sans antialiased ",
+            fontSans.variable,
+          )}
+        >
+          <div
+            className={cn(
+              "grid h-screen grid-rows-[auto,1fr]",
+              fontSans.variable,
+            )}
+          >
+            <SiteHeader />
+            <main className="overflow-y-scroll">{children}</main>
+          </div>
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

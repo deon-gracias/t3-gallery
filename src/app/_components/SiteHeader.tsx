@@ -1,9 +1,20 @@
 "use client";
 
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { UploadCloudIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { UploadButton } from "~/utils/uploadthing";
+import { toast } from "sonner";
+import { Button, buttonVariants } from "~/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "~/components/ui/dialog";
+import { cn } from "~/lib/utils";
+import { UploadDropzone } from "~/utils/uploadthing";
 
 export function SiteHeader() {
   const router = useRouter();
@@ -20,12 +31,35 @@ export function SiteHeader() {
             <SignInButton />
           </SignedOut>
           <SignedIn>
-            <UploadButton
-              endpoint="imageUploader"
-              onClientUploadComplete={(data) => {
-                router.refresh();
-              }}
-            />
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button>
+                  <UploadCloudIcon className="mr-2 size-4" />
+                  <span>Upload</span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Upload</DialogTitle>
+                </DialogHeader>
+                <UploadDropzone
+                  appearance={{
+                    button: cn(
+                      "after:bg-primary ut-uploading:opacity-100 ut-uploading:bg-primary/80",
+                      buttonVariants(),
+                    ),
+                  }}
+                  endpoint="imageUploader"
+                  onClientUploadComplete={(_data) => {
+                    router.refresh();
+                  }}
+                  onUploadError={(error: Error) => {
+                    toast.error(error.message);
+                    console.error(error);
+                  }}
+                />
+              </DialogContent>
+            </Dialog>
             <UserButton />
           </SignedIn>
         </div>
