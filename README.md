@@ -9,7 +9,7 @@
 - [x] Setup auth
 - [x] Add image upload
 - [x] Routing/image page
-- [ ] Error management
+- [x] Error management
 - [ ] Delete button
 - [ ] Analytics
 - [ ] Ratelimiting
