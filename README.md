@@ -10,6 +10,7 @@
 - [x] Add image upload
 - [x] Routing/image page
 - [x] Error management
+- [x] Parallel routes
 - [ ] Delete button
 - [ ] Analytics
 - [ ] Ratelimiting
