@@ -49,7 +49,7 @@ export function SiteHeader() {
                   appearance={{
                     label: "text-foreground",
                     button: cn(
-                      "after:bg-primary ut-uploading:opacity-100 ut-uploading:bg-primary/80",
+                      "after:bg-primary text-primary-foreground ut-uploading:opacity-100 ut-uploading:bg-primary/80 [&>svg]:text-primary-foreground",
                       buttonVariants(),
                     ),
                   }}

@@ -12,5 +12,5 @@
 - [x] Error management
 - [x] Parallel routes
 - [x] Analytics
-- [ ] Delete button
+- [x] Delete button
 - [ ] Ratelimiting
