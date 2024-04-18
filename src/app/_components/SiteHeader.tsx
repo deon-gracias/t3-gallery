@@ -4,6 +4,7 @@ import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { UploadCloudIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { usePostHog } from "posthog-js/react";
 import { toast } from "sonner";
 import { Button, buttonVariants } from "~/components/ui/button";
 import {
@@ -18,6 +19,8 @@ import { UploadDropzone } from "~/utils/uploadthing";
 
 export function SiteHeader() {
   const router = useRouter();
+
+  const posthog = usePostHog();
 
   return (
     <nav className="px-6 py-4">
@@ -44,13 +47,22 @@ export function SiteHeader() {
                 </DialogHeader>
                 <UploadDropzone
                   appearance={{
+                    label: "text-foreground",
                     button: cn(
                       "after:bg-primary ut-uploading:opacity-100 ut-uploading:bg-primary/80",
                       buttonVariants(),
                     ),
                   }}
                   endpoint="imageUploader"
-                  onClientUploadComplete={(_data) => {
+                  onUploadBegin={(data) => {
+                    posthog.capture("upload_begin", {
+                      data,
+                    });
+                  }}
+                  onClientUploadComplete={(res) => {
+                    posthog.capture("upload_success", {
+                      ...res,
+                    });
                     router.refresh();
                   }}
                   onUploadError={(error: Error) => {

@@ -9,6 +9,7 @@ import { ourFileRouter } from "./api/uploadthing/core";
 
 import { cn } from "~/lib/utils";
 import { Toaster } from "~/components/ui/sonner";
+import { CSPostHogProvider } from "./provider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -28,34 +29,36 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <NextSSRPlugin
-          /**
-           * The `extractRouterConfig` will extract **only** the route configs
-           * from the router to prevent additional information from being
-           * leaked to the client. The data passed to the client is the same
-           * as if you were to fetch `/api/uploadthing` directly.
-           */
-          routerConfig={extractRouterConfig(ourFileRouter)}
-        />
-        <body
-          className={cn(
-            "min-h-screen bg-background font-sans antialiased ",
-            fontSans.variable,
-          )}
-        >
-          <div
+      <CSPostHogProvider>
+        <html lang="en" className="dark" suppressHydrationWarning>
+          <NextSSRPlugin
+            /**
+             * The `extractRouterConfig` will extract **only** the route configs
+             * from the router to prevent additional information from being
+             * leaked to the client. The data passed to the client is the same
+             * as if you were to fetch `/api/uploadthing` directly.
+             */
+            routerConfig={extractRouterConfig(ourFileRouter)}
+          />
+          <body
             className={cn(
-              "grid h-screen grid-rows-[auto,1fr]",
+              "min-h-screen bg-background font-sans antialiased ",
               fontSans.variable,
             )}
           >
-            <SiteHeader />
-            <main className="overflow-y-scroll">{children}</main>
-          </div>
-          <Toaster />
-        </body>
-      </html>
+            <div
+              className={cn(
+                "grid h-screen grid-rows-[auto,1fr]",
+                fontSans.variable,
+              )}
+            >
+              <SiteHeader />
+              <main className="overflow-y-scroll">{children}</main>
+            </div>
+            <Toaster />
+          </body>
+        </html>
+      </CSPostHogProvider>
     </ClerkProvider>
   );
 }

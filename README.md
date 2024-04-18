@@ -11,6 +11,6 @@
 - [x] Routing/image page
 - [x] Error management
 - [x] Parallel routes
+- [x] Analytics
 - [ ] Delete button
-- [ ] Analytics
 - [ ] Ratelimiting

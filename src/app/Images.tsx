@@ -1,6 +1,8 @@
+import { auth } from "@clerk/nextjs/server";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import Image from "next/image";
 import Link from "next/link";
+import posthog from "posthog-js";
 import { getMyImages } from "~/server/queries";
 
 export async function Images() {

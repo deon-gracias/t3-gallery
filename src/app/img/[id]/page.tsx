@@ -1,4 +1,6 @@
+import { auth, clerkClient } from "@clerk/nextjs/server";
 import Image from "next/image";
+import posthog from "posthog-js";
 import { AspectRatio } from "~/components/ui/aspect-ratio";
 import {
   Table,
@@ -19,6 +21,7 @@ export default async function ImageModal({
   if (Number.isNaN(photoIdAsNumber)) throw new Error("Invalid photo id");
 
   const image = await getImage(photoIdAsNumber);
+  const uploaderInfo = await clerkClient.users.getUser(image.userId);
 
   return (
     <div className="mx-auto grid max-w-7xl gap-4 px-4 md:grid-cols-2">
@@ -52,6 +55,12 @@ export default async function ImageModal({
                 </TableCell>
               </TableRow>
             )}
+            <TableRow>
+              <TableHead>Uploader</TableHead>
+              <TableCell className="text-right">
+                {uploaderInfo.fullName}
+              </TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </div>
